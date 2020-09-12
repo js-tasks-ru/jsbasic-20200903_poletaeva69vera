@@ -4,5 +4,9 @@
  * @returns {Boolean}
  */
 function isEmpty(obj) {
-  // ваш код...
+  
+  for (let sched of Object.entries(obj)) {
+    return false;
+  } 
+  return true;
 }
