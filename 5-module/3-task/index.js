@@ -2,20 +2,42 @@ function initCarousel() {
   let btnLeft = document.querySelector('.carousel__arrow_left');
   let btnRight = document.querySelector('.carousel__arrow_right');
   let innerBox = document.querySelector('.carousel__inner');
-  let container = document.querySelector('.container');
   let slides = document.querySelectorAll('.carousel__slide');
-  let photo = document.querySelector('.carousel__img');
+  let photo = document.querySelector('[data-id="penang-shrimp"]');
+  btnLeft.style.display = 'none';	
+  btnLeft.addEventListener("click", leafL);
+  btnRight.addEventListener("click", leafR);
+  
+  var width = photo.offsetWidth;
+  var x = 0;
+  var maxPos = -(width*(slides.length-1));
 
-  container.addEventListener("click", leaf);
- 
-  function leaf(event){
-    let target = event.target; 
-   
+  function leafR(){
+  	btnLeft.style.display = '';
+  	let k = 0;
+  
+            if (k<slides.length-1){k++;}
+           
+        x -= width*k;
+        
+    if(x == maxPos){
+   	btnRight.style.display = 'none';
+  } 
+    		innerBox.style.transform = 'translateX(' + x + 'px)';
+   }
 
-    if (target==btnLeft){
-     alert('hello');
-    } else if (target==btnRight){
-     alert('user');
-    } else if(target!==btnLeft&&btnRight) return;
+  function leafL(){
+    btnRight.style.display = ''
+    
+    let i = 0;
+    
+     if (i<slides.length-1){i++;}
+     
+    x += width*i;
+
+    if (x==0){
+  	btnLeft.style.display = 'none';	
+  } 
+    innerBox.style.transform = 'translateX(' + x + 'px)';
   }
 }
