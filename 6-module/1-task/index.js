@@ -24,11 +24,55 @@
  *          age: 25,
  *          salary: '1000',
  *          city: 'Petrozavodsk'
- *      },ы
+ *      }, ы
  *
  * @constructor
  */
 export default class UserTable {
   constructor(rows) {
-  }
+    this.elem = document.createElement('table');
+    this.elem.innerHTML = `
+      <thead>
+          <tr>
+            <td>Имя</td>
+            <td>Возраст</td>
+            <td>Зарплата</td>
+            <td>Город</td>
+            <td><button class = "btn">X</button></td>
+          </tr>
+      </thead>
+    `;
+    let tbody = document.createElement('tbody');
+    this.elem.appendChild(tbody);
+    
+    rows.forEach(item => {
+    	let row = document.createElement('tr');
+    	
+    	Object.values(item).forEach(text => {
+    		let cell = document.createElement('td');
+    		let textNode = document.createTextNode(text);
+    		cell.appendChild(textNode);
+    		row.appendChild(cell); 
+    	})
+    	let cellL = document.createElement('td');
+    	cellL.innerHTML = `
+    	<button class = "btn">X</button>
+    	`;
+    	row.appendChild(cellL); 
+    	tbody.appendChild(row);
+    
+    });
+    this.elem.addEventListener("click", del);
+    function del(event){
+        
+    	 if (event.target.hasAttribute('class')==true){
+        
+        event.target.parentNode.parentNode.remove();
+    	 } else if (event.target.hasAttribute('class')==false){
+    	 return;
+    	 }
+
+    }
 }
+}
+
