@@ -38,7 +38,7 @@ export default class UserTable {
             <td>Возраст</td>
             <td>Зарплата</td>
             <td>Город</td>
-            <td><button class = "btn">X</button></td>
+            <td></td>
           </tr>
       </thead>
     `;
@@ -64,14 +64,11 @@ export default class UserTable {
     });
     this.elem.addEventListener("click", del);
     function del(event){
-        
-    	 if (event.target.hasAttribute('class')==true){
-        
-        event.target.parentNode.parentNode.remove();
-    	 } else if (event.target.hasAttribute('class')==false){
-    	 return;
-    	 }
-
+      if (event.target.tagName != 'BUTTON') {
+        return;
+      }
+      let tr = event.target.closest('tr');
+      tr.remove();
     }
 }
 }
